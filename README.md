@@ -24,14 +24,6 @@
 python -m pip install onesoundmidi
 ```
 
-### Via Github Releases
-#### For Linux:
-```bash
-curl https://github.com/IgorNk500/OneSoundMIDIPlayer/releases/latest/setup.sh | bash
-```
-
-#### Or for Windows:
-Download setup.bat and run it\
 **If you want to play via UI, go to [OneSound MIDI Player UI](https://github.com/IgorNk500/OneSoundUI)**
 
 ## Usage
