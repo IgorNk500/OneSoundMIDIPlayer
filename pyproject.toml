@@ -20,7 +20,7 @@
     classifiers = [
         "Programming Language :: Python :: 3",
         "Programming Language :: Cython",
-        "Development Status :: 1 - Planning",
+        "Development Status :: 3 - Alpha",
         "Natural Language :: English",
         "Environment :: Console",
         "Intended Audience :: End Users/Desktop",
