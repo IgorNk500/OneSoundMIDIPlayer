@@ -1,4 +1,4 @@
-# This workflow will collect the wheel library, add it to the release files, and upload the release to PyPi.
+# This workflow will collect the wheel and sdist for the library, add it to the release files, and upload the release to PyPi.
 
 name: Build release
 run-name: Building release...
