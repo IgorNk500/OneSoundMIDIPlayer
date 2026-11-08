@@ -5,6 +5,8 @@
 
 # v1.0
 + Final release
++ **OneSound MIDI Player** will be package with **Cyhton** extensions
+
 
 ## That is all
 
