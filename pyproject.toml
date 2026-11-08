@@ -1,39 +1,59 @@
 [build-system]
-    requires = ["setuptools>=42"]
+    requires = ["setuptools>=42", "Cython>=0.29.21", "numpy"]
     build-backend = "setuptools.build_meta"
 
 [project]
     dynamic = ["version"]
 
-    name = "lib-name"
-    description = "lib-desc"
+    name = "osm_player"
+    description = "OneSound MIDI Player - MIDI Player without SoundFont. Only one sound"
     readme = "README.md"
-    keywords = ["lib-kw"]
+    keywords = ["OneSound", "OneSoundMIDIPlayer", "OneSoundMIDI", "OneSoundMidi", "OneSoundPlayer",
+                "OneSoundMidiPlayer", "onesoundmidi", "onesoundmidiplayer", "osmplayer"]
     license = "MIT"
-    license-files = ["LICENSE"]
+    license-files = ["LICENSE", "external/signalsmith-stretch/LICENSE.txt",
+        "external/signalsmith-stretch/signalsmith-linear/LICENSE.txt"]
     authors = [
         { name = "IgorNk500", email = "igornk500@outlook.com" },
-        # You need to use your data
     ]
     requires-python = ">=3.10.0"
     classifiers = [
-    "Programming Language :: Python :: 3",
-    "Development Status :: 1 - Planning",
-    "Natural Language :: English"
-    # ...
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Cython",
+        "Development Status :: 1 - Planning",
+        "Natural Language :: English",
+        "Environment :: Console",
+        "Intended Audience :: End Users/Desktop",
+        "Topic :: Multimedia :: Sound/Audio :: MIDI",
+        "Typing :: Typed"
     ]
 
     dependencies = [
-    "..."
+        "soundcard",
+        "soundfile",
+        "numpy",
+        "mido",
+        "tqdm"
     ]
 
 [project.urls]
-    Homepage = "..."
-#    Documentation = ""
-    Repository = "..."
-    Issues = "..."
-    Changelog = "..."
+    Homepage = "https://github.com/IgorNk500/OneSoundMIDIPlayer"
+    Documentation = "https://github.com/IgorNk500/OneSoundMIDIPlayer/wiki"
+    Repository = "https://github.com/IgorNk500/OneSoundMIDIPlayer"
+    Issues = "https://github.com/IgorNk500/OneSoundMIDIPlayer/issues"
+    Changelog = "https://github.com/IgorNk500/OneSoundMIDIPlayer/blob/main/CHANGELOG.md"
 
+[project.scripts]
+    osm_player = "osm_player.__main__:main"
+    osmplayer = "osm_player.__main__:main"
+
+
+[tool.setuptools]
+    include-package-data = true # Include signalsmith-stretch submodule files from MANIFEST.in
+
+[tool.setuptools.exclude-package-data]
+    "*" = ["external/*", "external/**/*"] # Exclude signalsmith-stretch submodule files from wheel
+    "osm_player" = ["*.pyx", "*.pxd", "*.cpp", "*.hpp"]
 
 [tool.setuptools.dynamic]
-    version = {attr = "mymodule.__version__"}
+    version = {attr = "osm_player.__version__"}

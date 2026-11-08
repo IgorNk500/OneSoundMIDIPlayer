@@ -1,5 +1,5 @@
 <div align="center">
-	Project logo
+	<h1 style="color: #3081ba">Familiars</h1>
 	<!--
 	<img src="logo.png" alt="Logo">-->
 	<br/>
@@ -9,21 +9,32 @@
 
 ***
 
-# Name of the project
-### Desc.
+### MIDI Player without SoundFont. Only one sound
 ###### *[(Go to changelog)](CHANGELOG.md)*
 
 ## Table of contents
 1. [Installing](#installing)
-2. ...
+2. [Usage](#usage)
 3. [Build](#build)
 4. [Workflows](#workflows)
 
 ## Installing
+### Via pip
 ```bash
-python -m pip install pypi-id
+python -m pip install onesoundmidi
 ```
 
+### Via Github Releases
+#### For Linux:
+```bash
+curl https://github.com/IgorNk500/OneSoundMIDIPlayer/releases/latest/setup.sh | bash
+```
+
+#### Or for Windows:
+Download setup.bat and run it\
+**If you want to play via UI, go to [OneSound MIDI Player UI](https://github.com/IgorNk500/OneSoundUI)**
+
+## Usage
 ...
 
 ## Build
@@ -41,10 +52,6 @@ Don't forget to change the config in the `pyproject.toml` file before doing this
 + adds it to the release files,
 + and uploads the release to PyPi.
 
-**Also, project contains pytest and pylint workflows**
+**Also, project contains *pytest* and *pylint* workflows**
 
-## If you encounter any errors, please open [issue](https://github.com/IgorNk500/pylib-template/issues/new "New issue") on GitHub.
-<!--                                                                           ^
-                                                                               |
-										                                Edit this link!!!
--->
+## If you encounter any errors, please open [issue](https://github.com/IgorNk500/OneSoundMIDIPlayer/issues/new "New issue") on GitHub.

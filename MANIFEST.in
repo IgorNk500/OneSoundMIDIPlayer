@@ -1,0 +1,23 @@
+# MANIFEST.in
+# Add git submodule to sdist
+
+graft external/signalsmith-stretch
+recursive-include external/signalsmith-stretch *.h *.hpp
+recursive-include osm_player *.pyx *.pxd # Include Cython sources
+
+# Remove unused
+prune external/signalsmith-stretch/.git
+prune external/signalsmith-stretch/.gitignore
+prune external/signalsmith-stretch/.gitmodules
+prune external/signalsmith-stretch/README.md
+prune external/signalsmith-stretch/SUPPORT.txt
+prune external/signalsmith-stretch/web
+prune external/signalsmith-stretch/cmd
+prune external/signalsmith-stretch/CMakeLists.txt
+
+prune external/signalsmith-stretch/signalsmith-linear/.git
+prune external/signalsmith-stretch/signalsmith-linear/.gitignore
+prune external/signalsmith-stretch/signalsmith-linear/tests
+prune external/signalsmith-stretch/signalsmith-linear/README.md
+prune external/signalsmith-stretch/signalsmith-linear/SUPPORT.txt
+prune external/signalsmith-stretch/signalsmith-linear/CMakeLists.txt

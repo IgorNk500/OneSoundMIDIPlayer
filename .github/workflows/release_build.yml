@@ -11,63 +11,166 @@ on:
     types: [published]
 
 jobs:
-  build-lib:
-    name: Build library
-    runs-on: ubuntu-latest
+  build-wheels:
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, macos-latest, windows-latest ]
+        #python-version: ['3.10', '3.11', '3.12', '3.13', '3.14']
+        # cibuildwheel automatically select python version
+
+    name: Build wheels
+    runs-on: ${{ matrix.os }}
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: recursive # Clone all submodules
 
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.x"
-      - name: Build lib from setup.py + build wheel
-        run: |
-          python -m pip install build
-          python -m build
+          python-version: "3.14"
+
+      - name: Install build tools
+        run : |
+          python -m pip install --upgrade pip
+          python -m pip install cibuildwheel
+
+      - name: Build package wheels via cibuildwheel
+        run: python -m cibuildwheel --output-dir dist
+
       - name: Upload distributions
         uses: actions/upload-artifact@v4
         with:
-          name: release-dists
+          name: release-dists-${{ matrix.os }}
           path: dist/
-  upload-wheel:
-    # Uploads wheel to the release
-    name: Upload wheel
+
+  build-sdist:
+    name: Build distribution archive
     runs-on: ubuntu-latest
-    needs:
-      - build-lib
+
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: recursive # Clone all submodules
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+
+      - name: Install build tools
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install build
+
+      - name: Build package distribution archive
+        run: python -m build --sdist .
+
+      - name: Upload distributions
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-sdist
+          path: dist/
+
+  collect-dist:
+    name: Collect release artifacts into one artifact
+    runs-on: ubuntu-latest
+    needs:
+      - build-wheels
+      - build-sdist
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Retrieve release distributions (windows-latest)
+        uses: actions/download-artifact@v4
+        with:
+          name: release-dists-windows-latest
+          path: dist/
+
+      - name: Retrieve release distributions (macos-latest)
+        uses: actions/download-artifact@v4
+        with:
+          name: release-dists-macos-latest
+          path: dist/
+
+      - name: Retrieve release distributions (ubuntu-latest)
+        uses: actions/download-artifact@v4
+        with:
+          name: release-dists-ubuntu-latest
+          path: dist/
+
+      - name: Retrieve sdist
+        uses: actions/download-artifact@v4
+        with:
+          name: release-sdist
+          path: dist/
+
+      - name: Upload collected distributions
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-no_hash
+          path: dist/
+
+  compute-hashes:
+    name: Compute md5, sha1, sha256, sha512
+    runs-on: ubuntu-latest
+    needs:
+      - collect-dist
+
+    steps:
+      - uses: actions/checkout@v4
+
       - name: Retrieve release distributions
         uses: actions/download-artifact@v4
         with:
-          name: release-dists
+          name: release-no_hash
           path: dist/
-      - name: Get wheel+tar.gz filename
+
+      - name: Compute hash
         run: |
-          echo "whl=$(ls dist/ | grep ".whl")" >> "$GITHUB_ENV"
-          echo "tar=$(ls dist/ | grep ".tar.gz")" >> "$GITHUB_ENV"
-      - name: Upload wheel to Release
+          find ./dist -type f | while read -f file
+          do
+          md5sum "$file" > "$file.md5"
+          sha1sum "$file" > "$file.sha1"
+          sha256sum "$file" > "$file.sha256"
+          sha512sum "$file" > "$file.sha512"
+          done
+
+      - name: Upload distributions
+        uses: actions/upload-artifact@v4
+        with:
+          name: release
+          path: dist/
+
+  upload-release:
+    # Uploads wheels, sdist and hashes to the release
+    name: Upload wheel
+    runs-on: ubuntu-latest
+    needs:
+      - compute-hashes
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Retrieve release distributions
+        uses: actions/download-artifact@v4
+        with:
+          name: release
+          path: dist/
+
+      - name: Upload package to Github Releases
         uses: svenstaro/upload-release-action@v2
         with:
             repo_token: ${{ secrets.GITHUB_TOKEN }}
-            file: dist/${{ env.whl }}
-            asset_name: ${{ env.whl }}
+            file: dist/*
+            file_glob: true
             release_name: ${{ github.event.release.name }}
             overwrite: true
-      - name: Upload archive to Release
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: dist/${{ env.tar }}
-          asset_name: ${{ env.tar }}
-          release_name: ${{ github.event.release.name }}
-          overwrite: true
+
   pypi-publish:
     name: PyPi publish
     runs-on: ubuntu-latest
     needs:
-      - build-lib
+      - collect-dist
     permissions:
       # IMPORTANT: this permission is mandatory for trusted publishing
       id-token: write
@@ -85,10 +188,10 @@ jobs:
       # url: https://pypi.org/project/YOURPROJECT/${{ github.event.release.name }}
 
     steps:
-      - name: Retrieve release distributions
+      - name: Retrieve release distributions without hashes
         uses: actions/download-artifact@v4
         with:
-          name: release-dists
+          name: release-no_hash
           path: dist/
 
       - name: Publish release distributions to PyPI

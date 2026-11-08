@@ -1,0 +1,3 @@
+[submodule "external/signalsmith-stretch"]
+	path = external/signalsmith-stretch
+	url = https://github.com/IgorNk500/signalsmith-stretch.git
