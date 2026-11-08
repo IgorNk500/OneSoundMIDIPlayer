@@ -7,17 +7,19 @@ recursive-include osm_player *.pyx *.pxd # Include Cython sources
 
 # Remove unused
 prune external/signalsmith-stretch/.git
-prune external/signalsmith-stretch/.gitignore
-prune external/signalsmith-stretch/.gitmodules
-prune external/signalsmith-stretch/README.md
-prune external/signalsmith-stretch/SUPPORT.txt
+exclude external/signalsmith-stretch/.git
+exclude external/signalsmith-stretch/.gitignore
+exclude external/signalsmith-stretch/.gitmodules
+exclude external/signalsmith-stretch/README.md
+exclude external/signalsmith-stretch/SUPPORT.txt
 prune external/signalsmith-stretch/web
 prune external/signalsmith-stretch/cmd
-prune external/signalsmith-stretch/CMakeLists.txt
+exclude external/signalsmith-stretch/CMakeLists.txt
 
 prune external/signalsmith-stretch/signalsmith-linear/.git
-prune external/signalsmith-stretch/signalsmith-linear/.gitignore
+exclude external/signalsmith-stretch/signalsmith-linear/.git
+exclude external/signalsmith-stretch/signalsmith-linear/.gitignore
 prune external/signalsmith-stretch/signalsmith-linear/tests
-prune external/signalsmith-stretch/signalsmith-linear/README.md
-prune external/signalsmith-stretch/signalsmith-linear/SUPPORT.txt
-prune external/signalsmith-stretch/signalsmith-linear/CMakeLists.txt
+exclude external/signalsmith-stretch/signalsmith-linear/README.md
+exclude external/signalsmith-stretch/signalsmith-linear/SUPPORT.txt
+exclude external/signalsmith-stretch/signalsmith-linear/CMakeLists.txt
