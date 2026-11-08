@@ -1,10 +1,15 @@
 <div align="center">
-	<h1 style="color: #3081ba">Familiars</h1>
+	<h1 style="color: #3081ba">OneSound MIDI Player</h1>
 	<!--
 	<img src="logo.png" alt="Logo">-->
 	<br/>
 	<br/>
-	Project bages
+	<a href="https://github.com/IgorNk500/OneSoundMIDIPlayer/actions/workflows/release_build.yml"><img src="https://github.com/IgorNk500/OneSoundMIDIPlayer/actions/workflows/release_build.yml/badge.svg" alt="Build"></a>
+	<a href="https://github.com/IgorNk500/OneSoundMIDIPlayer/actions/workflows/pylint.yml"><img src="https://github.com/IgorNk500/OneSoundMIDIPlayer/actions/workflows/pylint.yml/badge.svg" alt="PyLint"></a>
+	<a href="https://github.com/IgorNk500/OneSoundMIDIPlayer/actions/workflows/pytest.yml"><img src="https://github.com/IgorNk500/OneSoundMIDIPlayer/actions/workflows/pytest.yml/badge.svg" alt="PyTest"></a>
+	<br/>
+	<a href="https://www.python.org/downloads/"><img src="https://img.shields.io/pypi/pyversions/osm_player" alt="Supported Python versions"></a>
+	<a href="https://github.com/IgorNk500/OneSoundMIDIPlayer"><img src="https://img.shields.io/badge/github-repo-blue?logo=github" alt="GitHub repo"></a>
 </div>
 
 ***
