@@ -6,7 +6,7 @@
     dynamic = ["version"]
 
     name = "osm-player"
-    description = "OneSound MIDI Player - MIDI Player without SoundFont. Only one sound"
+    description = "OneSound MIDI Player — MIDI Player without SoundFont. Only one sound"
     readme = "README.md"
     keywords = ["OneSound", "OneSoundMIDIPlayer", "OneSoundMIDI", "OneSoundMidi", "OneSoundPlayer",
                 "OneSoundMidiPlayer", "onesoundmidi", "onesoundmidiplayer", "osmplayer", "osm_player"]
