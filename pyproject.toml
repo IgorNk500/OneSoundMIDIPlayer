@@ -48,6 +48,9 @@
     osmplayer = "osm_player.__main__:main"
 
 
+[tool.pylint.design]
+    max-args = 7
+
 [tool.setuptools]
     include-package-data = true # Include signalsmith-stretch submodule files from MANIFEST.in
 

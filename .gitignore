@@ -281,3 +281,4 @@ http-client.private.env.json
 
 osm_player/Sampler.cpp
 osm_player/_Stretch.cpp
+osm_player/Stretch.cpp

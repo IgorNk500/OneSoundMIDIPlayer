@@ -26,51 +26,56 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE."""
 import logging
+from typing import Optional, Callable
+
 import mido
 from mido.midifiles.midifiles import DEFAULT_TEMPO
-from tqdm import tqdm
 
-from .Sampler import Sampler
-from .Stretch import Stretch
+# pylint: disable=import-self
+from .Sampler      import Sampler
+from .Stretch      import Stretch
+from ._tqdm_config import TqdmConfig
 
 __author__  = "IgorNk500"
 __version__ = "1.0"
-__all__ = ["Sampler", "Stretch", "play", "save"]
+__all__ = ["Sampler", "Stretch", "TqdmConfig",
+           "DEFAULT_TEMPO",
+           "play", "save"]
 
-def play(sample: str, midi: str, root_note: int = 60, tempo_factor: float = 1.0, output: str | None = None,
-         custom_tqdm = tqdm, tqdm_gui: bool = False, tqdm_color: str = ""):
+
+# pylint: disable=too-many-arguments
+# pylint: disable=too-many-positional-arguments
+def play(sample: str, midi: str, root_note: int = 60, tempo_factor: float = 1.0,
+         output: Optional[str] = None,
+         custom_tqdm: Optional[TqdmConfig | Callable] = None):
     """Play music
     :arg sample       : Path to sample sound file
     :arg midi         : Path to MIDI file
     :arg root_note    : Sample base (root) note *(in MIDI format)*
     :arg tempo_factor : MIDI playing tempo factor *(coefficient)*
     :arg output       : Output file. if not stated, only play
-    :arg custom_tqdm  : Custom TQDM function / class. Set None for disable TQDM
-    :arg tqdm_gui     : Run TQDM in GUI-mode
-    :arg tqdm_color   : TQDM bar color"""
+    :arg custom_tqdm  : Custom TQDM in `TqdmConfig` class. Set None for disable TQDM
+    """
     logger = logging.getLogger(__name__)
 
-    logger.info(f"Reading MIDI ({midi})...")
+    logger.info("Reading MIDI (%s)...", midi)
     mid = mido.MidiFile(midi)
 
     logger.info("Preparing")
 
     logger.debug("Preparing TQDM")
-    if tqdm_color == "":
-        logger.debug("TQDM Color not stated")
-        tqdm_color = None
-
     if custom_tqdm is None:
         logger.info("TQDM Disabled")
-        def custom_tqdm(iterable, **kwargs): return iterable
+        def custom_tqdm(iterable, **kwargs):
+            return iterable
 
     logger.debug("Preparing Sampler")
     sampler = Sampler(sample, root_note=root_note)
 
     tempo = int(DEFAULT_TEMPO * tempo_factor) # Base tempo
-    time_factor = 0 # Time factor; current_tempo / base_temp0
+    time_factor = 0 # time_factor = current_tempo / base_tempo
     logger.info("PLAYING")
-    for msg in custom_tqdm(mid.play(meta_messages=True), desc="Playing", colour=tqdm_color, gui=tqdm_gui,
+    for msg in custom_tqdm(mid.play(meta_messages=True), desc="Playing",
                            total=len(list(mid))):
         # Message processor (match-case statement only in Python >=3.10)
         match msg.type:
@@ -82,21 +87,22 @@ def play(sample: str, midi: str, root_note: int = 60, tempo_factor: float = 1.0,
 
             # Meta message "set_tempo"
             case "set_tempo":
-                if not custom_tqdm is None:
-                    print("\n")
-                logger.debug("Updating tempo: " + str(msg.tempo))
+                print('\n') # New line after TQDM bar
+                logger.debug("Updating tempo: %s", msg.tempo)
                 time_factor = msg.tempo / tempo
-                logger.debug("New time factor: " + str(time_factor))
+                logger.debug("New time factor: %s", time_factor)
 
     logger.debug("Ending Sampler session")
     sampler.close()
+
     logger.info("SUCCESS!")
 
 
-
+# pylint: disable=too-many-arguments
+# pylint: disable=too-many-positional-arguments
 def save(sample: str, midi: str, output: str, root_note: int = 60, tempo_factor: float = 1.0,
          play_after: bool = False,
-         custom_tqdm = tqdm, tqdm_gui: bool = False, tqdm_color: str = ""):
+         custom_tqdm: Optional[TqdmConfig] = None):
     """Save music
     :arg sample       : Path to sample sound file
     :arg midi         : Path to MIDI file
@@ -109,8 +115,10 @@ def save(sample: str, midi: str, output: str, root_note: int = 60, tempo_factor:
     :arg tqdm_color   : TQDM bar color"""
     logger = logging.getLogger(__name__)
 
-    logger.info(f"Reading MIDI ({midi})...")
+    logger.info("Reading MIDI (%s)...", midi)
     mid = mido.MidiFile(midi)
 
     logger.info("Preparing stretcher...")
     #stretcher = Stretch()
+
+    # TODO

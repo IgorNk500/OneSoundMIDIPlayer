@@ -10,14 +10,16 @@ from numpy import get_include
 
 CYTHON_LANGUAGE_LEVEL = 3
 CYTHON_LANGUAGE       = "c++"
-CYTHON_INCLUDES       = [join("external", "signalsmith-stretch"), join("osm_player", "stretch_wrapper.hpp")]
+CYTHON_INCLUDES       = [join("external", "signalsmith-stretch"),
+                         join("osm_player", "stretch_wrapper.hpp")
+                        ]
 
 if os.name == 'nt':  # Windows (MSVC)
     CYTHON_COMPILE_ARGS = ['/O2', '/Oi', '/Ot', '/arch:AVX2']
 else:  # Linux / macOS (GCC / Clang)
     CYTHON_COMPILE_ARGS = ['-O2', '-march=native', '-ffast-math']
 
-"""
+'''
 def find_pyx(base_dir) -> list[Extension]:
     extensions = []
     base_path = Path(base_dir)
@@ -47,7 +49,7 @@ def find_all(path=".") -> list[Extension]:
     print("Found", str(len(ext_modules)), "Cython sources")
 
     return ext_modules
-"""
+'''
 
 extensions = [
     Extension(

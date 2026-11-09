@@ -1,8 +1,10 @@
 """Config dataclass for TQDM"""
-from dataclass import dataclass
-from typing import Optional
+from dataclasses import dataclass
+from typing import Optional, Iterable
 
 from ._tqdm_styles import STYLES
+
+__all__ = ["TqdmConfig", "STYLES"]
 
 @dataclass
 class TqdmConfig:
@@ -17,9 +19,13 @@ class TqdmConfig:
         :returns : TQDM class/ constructor function"""
         return STYLES[self.style]
 
-    def get_tqdm(self, iterable, desc: str, **kwargs):
+    def get_tqdm(self, iterable: Iterable, desc: str, **kwargs):
         """Get final TQDM class / constructor function
         :returns : Final TQDM class / constructor function"""
-        return self.get_style(iterable, desc,
+        return self.get_style()(iterable, desc,
                               gui=self.gui, colour=self.colour,
                               **kwargs)
+
+    def __call__(self, iterable: Iterable, desc: str, **kwargs):
+        """`tqdm_config()` call"""
+        return self.get_tqdm(iterable, desc, **kwargs)
