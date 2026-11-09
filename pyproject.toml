@@ -5,11 +5,11 @@
 [project]
     dynamic = ["version"]
 
-    name = "osm_player"
+    name = "osm-player"
     description = "OneSound MIDI Player - MIDI Player without SoundFont. Only one sound"
     readme = "README.md"
     keywords = ["OneSound", "OneSoundMIDIPlayer", "OneSoundMIDI", "OneSoundMidi", "OneSoundPlayer",
-                "OneSoundMidiPlayer", "onesoundmidi", "onesoundmidiplayer", "osmplayer"]
+                "OneSoundMidiPlayer", "onesoundmidi", "onesoundmidiplayer", "osmplayer", "osm_player"]
     license = "MIT"
     license-files = ["LICENSE", "external/signalsmith-stretch/LICENSE.txt",
         "external/signalsmith-stretch/signalsmith-linear/LICENSE.txt"]
