@@ -38,10 +38,11 @@ python -m pip install onesoundmidi
 ### To build the package, run:
 ```bash
 python -m pip install build
-python -m build
+python -m build .
 ```
 Don't forget to change the config in the `pyproject.toml` file before doing this.\
 **All distributions are stored in the `dist` folder**
+#### The project is partially written in Cython. The wheel is valid only for your OS
 
 ## Workflows
 **This project contains one workflow that:**
