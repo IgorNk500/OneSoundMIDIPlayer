@@ -36,7 +36,7 @@ python -m pip install onesoundmidi
 ...
 
 ## Downloading the repo
-### Dont forget update submodules after cloning the repository:
+### Don't forget update submodules after cloning the repository:
 ```bash
 git clone https://github.com/IgorNk500/OneSoundMIDIPlayer.git
 cd OneSoundMIDIPlayer
