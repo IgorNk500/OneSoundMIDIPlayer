@@ -188,10 +188,8 @@ cdef class _Sampler:
 
 ###############
 
-# Python realization
+# Python realization (wrapper)
 class Sampler:
-    cdef _Stretch _instance
-
     @property
     def is_playing(self): return self._instance.is_playing
 
