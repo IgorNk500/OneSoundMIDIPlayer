@@ -7,8 +7,6 @@ from . cimport _Stretch
 from ._Stretch import Stretch as _Stretch
 
 class Stretch:
-    cdef _Stretch _instance
-
     def __init__(self, channels: int, sample_rate: float):
         self._instance = _Stretch()
         self._instance.preset(channels, sample_rate)
