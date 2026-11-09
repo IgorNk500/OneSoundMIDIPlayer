@@ -3,6 +3,8 @@
 setuptools>=42
 Cython>=0.29.21
 
+wheel
+
 #################
 
 
