@@ -20,8 +20,9 @@
 ## Table of contents
 1. [Installing](#installing)
 2. [Usage](#usage)
-3. [Build](#build)
-4. [Workflows](#workflows)
+3. [Downloading the repo](#downloadingtherepo)
+4. [Build](#build)
+5. [Workflows](#workflows)
 
 ## Installing
 ### Via pip
@@ -34,7 +35,16 @@ python -m pip install onesoundmidi
 ## Usage
 ...
 
+## Downloading the repo
+### Dont forget update submodules after cloning the repository:
+```bash
+git clone https://github.com/IgorNk500/OneSoundMIDIPlayer.git
+cd OneSoundMIDIPlayer
+git submodule update --init --recursive
+```
+
 ## Build
+**See [Downloading the repo](#downloadingtherepo)**
 ### To build the package, run:
 ```bash
 python -m pip install build
