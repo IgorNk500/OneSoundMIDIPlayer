@@ -42,14 +42,9 @@ def config_logger(debug: bool):
 def main():
     """Main CLI entry"""
     from argparse import ArgumentParser
-    parser = ArgumentParser(NAME, description="OneSound MIDI Player\n"
-                                              "Play  MIDI (.mid) files only one sound (no SoundFont)\n\n"
-                                              "Copyright (c) 2026 IgorNk500 (https://github.com/IgorNk500)\n"
-                            "Homepage: https://github.com/IgorNk500/OneSoundMIDIPlayer\n"
-                            "Documentation:  https://github.com/IgorNk500/OneSoundMIDIPlayer/wiki\n"
-                            "Repository: https://github.com/IgorNk500/OneSoundMIDIPlayer\n"
-                            "Issues: https://github.com/IgorNk500/OneSoundMIDIPlayer/issues\n"
-                            "Changelog: https://github.com/IgorNk500/OneSoundMIDIPlayer/blob/main/CHANGELOG.md"
+    parser = ArgumentParser(NAME, description="OneSound MIDI Player. "
+                                              "Play  MIDI (.mid) files only one sound (no SoundFont). "
+                                              "Copyright (c) 2026 IgorNk500 (https://github.com/IgorNk500)"
                             )
 
     parser.add_argument("sample", type=str, help="path to sample sound file")
