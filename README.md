@@ -51,7 +51,7 @@ positional arguments:
   midi                  path to MIDI file
 
 options:
-  -h, --help            show this help
+  -h, --help            show help
                         message and exit
   --debug               enable debug logging
   -r, --root-note ROOT_NOTE
