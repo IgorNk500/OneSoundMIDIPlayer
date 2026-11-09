@@ -20,7 +20,7 @@
 ## Table of contents
 1. [Installing](#installing)
 2. [Usage](#usage)
-3. [Downloading the repo](#downloadingtherepo)
+3. [Downloading the repo](#downloading-the-repo)
 4. [Build](#build)
 5. [Workflows](#workflows)
 
@@ -44,7 +44,7 @@ git submodule update --init --recursive
 ```
 
 ## Build
-**See [Downloading the repo](#downloadingtherepo)**
+**See [Downloading the repo](#downloading-the-repo)**
 ### To build the package, run:
 ```bash
 python -m pip install build
