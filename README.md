@@ -35,7 +35,7 @@ python -m pip install onesoundmidi
 ## Usage
 **Use via `osm_player` or `osmplayer`**
 
-```bash
+```
 osm_player / osmplayer [-h] [--debug]
                        [-r ROOT_NOTE]
                        [-t TEMPO_FACTOR] [-n]
