@@ -33,7 +33,59 @@ python -m pip install onesoundmidi
 **If you want to play via UI, go to [OneSound MIDI Player UI](https://github.com/IgorNk500/OneSoundUI)**
 
 ## Usage
-...
+**Use via `osm_player` or `osmplayer`**
+
+```
+osm_player / osmplayer [-h] [--debug]
+                       [-r ROOT_NOTE]
+                       [-t TEMPO_FACTOR] [-n]
+                       [-o OUTPUT] [-p]
+                       [--play-after] [-c COLOUR]
+                       [-s STYLE] [-g]
+                       [--no-tqdm]
+                       sample midi
+
+positional arguments:
+  sample                path to sample sound
+                        file
+  midi                  path to MIDI file
+
+options:
+  -h, --help            show this help
+                        message and exit
+  --debug               enable debug logging
+  -r, --root-note ROOT_NOTE
+                        sample base (root)
+                        note in MIDI format.
+                        default 60 (C4)
+  -t, --tempo-factor TEMPO_FACTOR
+                        MIDI playing tempo
+                        factor (coefficient)
+  -n, --no-logger       disable logging
+                        messages
+  -o, --output OUTPUT   if stated, path to
+                        output sound file.
+                        if not stated,
+                        result will be
+                        played
+  -p, --play            use with --output
+                        without --play-
+                        after. Play the
+                        result while file
+                        writing
+  --play-after          use with --output
+                        without --play. Play
+                        the result after
+                        operation
+  -c, --colour COLOUR   TQDM bar colour
+  -s, --style STYLE     TQDM bar style
+                        (default, neon,
+                        modern, retro,
+                        compact,
+                        minimalistic)
+  -g, --gui             open TQDM bar in GUI
+  --no-tqdm             disable TQDM bar
+```
 
 ## Downloading the repo
 ### Don't forget update submodules after cloning the repository:
