@@ -3,8 +3,8 @@
 cimport numpy as cnp
 cnp.import_array()
 
-from . cimport _Stretch
-from ._Stretch import Stretch as _Stretch
+from . cimport _stretch
+from ._stretch import Stretch as _Stretch
 
 class Stretch:
     def __init__(self, channels: int, sample_rate: float):

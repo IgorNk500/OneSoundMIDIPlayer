@@ -14,8 +14,9 @@ INCDIR                = "include"
 
 CYTHON_LANGUAGE_LEVEL = 3
 CYTHON_LANGUAGE       = "c++"
-CYTHON_INCLUDES       = [join(EXTERNAL, "signalsmith-stretch"),
-                         join(INCDIR, "stretch_wrapper.hpp")
+CYTHON_INCLUDES       = [
+                         INCDIR,
+                         join(EXTERNAL, "signalsmith-stretch")
                         ]
 
 if os.name == 'nt':  # Windows (MSVC)

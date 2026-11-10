@@ -1,6 +1,6 @@
 // stretch_wrapper.cpp
 // Fast access to Signalsmith Stretch from Cython
-#include "stretch_wrapper.hpp"
+#include <stretch_wrapper.hpp>
 
 StretchFloat* stretch_create() {
     return new StretchFloat();

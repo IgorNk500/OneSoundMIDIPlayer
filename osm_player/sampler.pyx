@@ -19,8 +19,8 @@ import soundfile as sf
 # Init NumPy API
 cnp.import_array()
 
-from . cimport _Stretch
-from ._Stretch import Stretch
+from . cimport _stretch
+from ._stretch import Stretch
 
 cdef class _Sampler:
     cdef public int  buffer_size
