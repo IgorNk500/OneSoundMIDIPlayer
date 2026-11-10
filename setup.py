@@ -19,6 +19,7 @@ CYTHON_INCLUDES       = [
                          join(EXTERNAL, "signalsmith-stretch")
                         ]
 
+# Optimization compile arguments
 if os.name == 'nt':  # Windows (MSVC)
     CYTHON_COMPILE_ARGS = ['/O2', '/Oi', '/Ot', '/arch:AVX2']
 else:  # Linux / macOS (GCC / Clang)

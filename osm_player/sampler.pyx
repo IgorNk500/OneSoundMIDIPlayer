@@ -126,6 +126,13 @@ cdef class _Sampler:
             else:
                 self.logger.error(f"Cannot disable {note} note. It is inactive")
 
+    # Safed note disabler
+    cpdef bint safe_note_off(self, int note):
+        if self.playing(note):
+            self.note_off(note)
+            return True
+        return False
+
     # Check note
     cpdef bint playing(self, int note):
         return note in self.active_notes.keys()
@@ -229,10 +236,7 @@ class Sampler:
 
     # Safed note disabler
     def safe_note_off(self, note: int = 60):
-        if self.playing(note):
-            self.note_off(note)
-            return True
-        return False
+        self._instance.safe_note_off(note)
 
     def restart(self):
         self._instance.restart()
