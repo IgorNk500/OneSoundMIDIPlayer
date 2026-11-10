@@ -279,6 +279,6 @@ http-client.private.env.json
 
 ##########  Cython GitIgnore  ##########
 
-osm_player/Sampler.cpp
-osm_player/_Stretch.cpp
-osm_player/Stretch.cpp
+osm_player/sampler.cpp
+osm_player/_stretch.cpp
+osm_player/stretch.cpp

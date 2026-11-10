@@ -1,4 +1,4 @@
-# distutils: sources = osm_player/stretch_wrapper.cpp
+# distutils: sources = src/stretch_wrapper.cpp
 # cython: boundscheck=False
 """python-stretch library on Cython"""
 

@@ -1,6 +1,7 @@
 # _Stretch.pyx class definition
 cimport numpy as cnp
 
+# stretch_wrapper.cpp (.hpp) definition
 cdef extern from "stretch_wrapper.hpp":
     ctypedef struct StretchFloat:
         pass

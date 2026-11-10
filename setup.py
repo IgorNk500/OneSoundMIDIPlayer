@@ -8,10 +8,14 @@ from Cython.Build import cythonize
 from numpy import get_include
 
 
+EXTERNAL              = "external"
+SRCDIR                = "src"
+INCDIR                = "include"
+
 CYTHON_LANGUAGE_LEVEL = 3
 CYTHON_LANGUAGE       = "c++"
-CYTHON_INCLUDES       = [join("external", "signalsmith-stretch"),
-                         join("osm_player", "stretch_wrapper.hpp")
+CYTHON_INCLUDES       = [join(EXTERNAL, "signalsmith-stretch"),
+                         join(INCDIR, "stretch_wrapper.hpp")
                         ]
 
 if os.name == 'nt':  # Windows (MSVC)
@@ -53,22 +57,22 @@ def find_all(path=".") -> list[Extension]:
 
 extensions = [
     Extension(
-        "osm_player.Sampler",
-        sources=[join("osm_player", "Sampler.pyx")],
+        "osm_player.sampler",
+        sources=[join("osm_player", "sampler.pyx")],
         include_dirs=[get_include()] + CYTHON_INCLUDES,
         extra_compile_args=CYTHON_COMPILE_ARGS,
         language=CYTHON_LANGUAGE
     ),
     Extension(
-        "osm_player._Stretch",
-        sources=[join("osm_player", "_Stretch.pyx"), join("osm_player", "stretch_wrapper.cpp")],
+        "osm_player._stretch",
+        sources=[join("osm_player", "_stretch.pyx"), join(SRCDIR, "stretch_wrapper.cpp")],
         include_dirs=[get_include()] + CYTHON_INCLUDES,
         extra_compile_args=CYTHON_COMPILE_ARGS,
         language=CYTHON_LANGUAGE
     ),
     Extension(
-        "osm_player.Stretch",
-        sources=[join("osm_player", "Stretch.pyx")],
+        "osm_player.stretch",
+        sources=[join("osm_player", "stretch.pyx")],
         include_dirs=[get_include()] + CYTHON_INCLUDES,
         extra_compile_args=CYTHON_COMPILE_ARGS,
         language=CYTHON_LANGUAGE

@@ -32,8 +32,8 @@ import mido
 from mido.midifiles.midifiles import DEFAULT_TEMPO
 
 # pylint: disable=import-self
-from .Sampler      import Sampler
-from .Stretch      import Stretch
+from .sampler      import Sampler
+from .stretch      import Stretch
 from ._tqdm_config import TqdmConfig
 
 __author__  = "IgorNk500"
