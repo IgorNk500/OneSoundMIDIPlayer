@@ -44,8 +44,9 @@
     Changelog = "https://github.com/IgorNk500/OneSoundMIDIPlayer/blob/main/CHANGELOG.md"
 
 [project.scripts]
-    osm_player = "osm_player.__main__:main"
-    osmplayer = "osm_player.__main__:main"
+    osm_player   = "osm_player.__main__:main"
+    osmplayer    = "osm_player.__main__:main"
+    onesoundmidi = "osm_player.__main__:main"
 
 
 [tool.pylint.design]
